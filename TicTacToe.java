@@ -31,7 +31,16 @@ public class TicTacToe {
             }
 
             printBoard(board);
-        }
+            int count = checkWin(board);
+            if(count == 3){
+                System.out.println("X wins!!!");
+                break;
+            }else if(count == -3){
+                System.out.println("O wins!!!");
+                break;
+            }
+        }    
+
   
     }
 
@@ -58,6 +67,103 @@ public class TicTacToe {
         return spot;
 
     }
+
+    public static int checkWin(char[][] board){
+        int rows = checkRows(board);
+        int columns = checkColumns(board);
+        int leftDiagonal = checkLeft(board);
+        int rightDiagonal = checkRight(board);
+        
+        if(Math.abs(rows) == 3) return rows;
+
+        if(Math.abs(columns) == 3) return columns;
+        
+        if(Math.abs(leftDiagonal) == 3) return leftDiagonal;
+        
+        if(Math.abs(rightDiagonal) == 3) return rightDiagonal;
+
+        return 0;
+
+    }
+
+    public static int checkRows(char[][] board){
+        int count=0;
+        for(int i=0; i<board.length; i++){
+            for(int j=0; j<board[i].length; j++){
+                if(board[i][j] == 'X'){
+                    count++;
+                }else if(board[i][j] == 'O'){
+                    count--;
+                }
+                
+            }
+
+            if(count == 3 || count == -3){
+               return count;
+             }else{
+                count = 0;
+             }
+            
+        }
+
+        return count;
+    }
+
+    public static int checkColumns(char[][] board){
+        int count=0;
+        for(int i=0; i<board.length; i++){
+            for(int j=0; j<board[i].length; j++){
+                if(board[j][i] == 'X'){
+                    count++;
+                }else if(board[j][i] == 'O'){
+                    count--;
+                }
+                
+            }
+
+            if(count == 3 || count == -3){
+               return count;
+             }else{
+                count = 0;
+             }
+            
+        }
+
+        return count;
+    }
+
+
+    public static int checkLeft(char[][] board){
+        int count=0;
+        for(int i=0; i<board.length; i++){
+            
+            if(board[i][i] == 'X'){
+                count++;
+            }else if(board[i][i] == 'O'){
+                count--;
+            }
+            
+        }
+
+        return count;
+    }
+
+    public static int checkRight(char[][] board){
+        int count=0;
+        for(int i=0; i<board.length; i++){
+            if(board[2-i][i] == 'X'){
+                count++;
+            }else if(board[i][i] == 'O'){
+                count--;
+            }
+            
+        }
+
+   
+        return count;
+    }
+
+
 
     
 }
